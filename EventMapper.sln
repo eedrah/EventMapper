@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMapper", "EventMapper\EventMapper.csproj", "{89027309-2EB4-44A9-B045-DE4DCD4DF095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMapper.Tests", "..\..\Visual Studio 2013\Projects\EventMapper\EventMapper.Tests\EventMapper.Tests.csproj", "{E9FBBDB0-6920-4123-B2C3-FD84CB92F8B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventMapper.Tests", "EventMapper.Tests\EventMapper.Tests.csproj", "{E9FBBDB0-6920-4123-B2C3-FD84CB92F8B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
