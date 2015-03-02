@@ -1,2 +1,9 @@
-﻿body {
+﻿body,html, #map-canvas {
+    height: 100%;
+
+}
+
+#map-canvas {
+    width: 100%;
+
 }
