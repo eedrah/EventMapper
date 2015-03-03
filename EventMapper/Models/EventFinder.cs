@@ -22,6 +22,18 @@ namespace EventMapper.Models
                     End = new DateTime(2015, 2, 28, 12, 12, 12),
                     Link = new Uri("http://google.com"),
                     Price = 12.99m
+                },
+
+                new EventItem()
+                {
+                    Latitude = -41.327594,
+                    Longitude = 174.807598,
+                    Title = "My event number two!",
+                    Description = "My description....",
+                    Start = new DateTime(2015, 2, 28, 12, 12, 12),
+                    End = new DateTime(2015, 2, 28, 12, 12, 12),
+                    Link = new Uri("http://google.com"),
+                    Price = 12.99m
                 }
             };
         }
