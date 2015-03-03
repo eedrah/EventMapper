@@ -9,6 +9,9 @@
 //    }
 //}
 
+var markers = [
+    ["Title", -41, 175],
+];
 //eventObjects(json_array);
 
 function initialize() {
