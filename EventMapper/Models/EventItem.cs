@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Xml.Serialization;
 using RestSharp.Deserializers;
 
 namespace EventMapper.Models {
@@ -19,9 +20,13 @@ namespace EventMapper.Models {
         //public bool IsFree { get; set; }
     }
 
+    [DeserializeAs(Name = "events")]
     public class Events
     {
+        [DeserializeAs(Attribute = true, Name = "count")]
+        public string Counting { get; set; }
+
         [DeserializeAs(Name = "event")]
-        public List<EventItem> EventItems { get; set; }
+        public EventItem[] EventItems { get; set; }
     }
 }

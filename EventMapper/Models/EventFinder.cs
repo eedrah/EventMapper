@@ -46,7 +46,7 @@ namespace EventMapper.Models
                 );
 
             IRestResponse<Events> response = EventFinderClient.Execute<Events>(request);
-            return response.Data.EventItems;
+            return null; // response.Data;
         }
     }
 }
