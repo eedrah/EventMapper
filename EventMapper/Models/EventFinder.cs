@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using EventMapper.Controllers;
 using EventMapper.Models.Interfaces;
 using RestSharp;
@@ -22,15 +24,19 @@ namespace EventMapper.Models
 
         public IEnumerable<EventItem> Search(string searchTerm)
         {
-            return MakeEventFinderRequest();
+            string xml = MakeEventFinderRequest();
+            var serializer = new XmlSerializer(typeof (Events));
+            Events theEvents = (Events)serializer.Deserialize(new StringReader(xml));
+
+            return theEvents.EventItems;
         }
 
-        private IEnumerable<EventItem> MakeEventFinderRequest()
+        private string MakeEventFinderRequest()
         {
             RestRequest request = new RestRequest(ApiResource, Method.GET);
             request.RequestFormat = DataFormat.Xml;
             //request.AddQueryParameter("q", "my search string");  // Can use AND OR, NOT and ()
-            request.AddQueryParameter("row", "20");
+            request.AddQueryParameter("rows", "20");
             //request.AddQueryParameter("offset", "20");
             request.AddQueryParameter("order", "date");
             //request.AddQueryParameter("free", "1");
@@ -45,8 +51,8 @@ namespace EventMapper.Models
                 "event:(point,name,datetime_end,datetime_start,description,location_summary,url,is_free)"
                 );
 
-            IRestResponse<Events> response = EventFinderClient.Execute<Events>(request);
-            return null; // response.Data;
+            IRestResponse response = EventFinderClient.Execute(request);
+            return response.Content;
         }
     }
 }
