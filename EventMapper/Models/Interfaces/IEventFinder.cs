@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EventMapper.Models;
 
-namespace EventMapper.Tests.Controllers
+namespace EventMapper.Models.Interfaces
 {
     public interface IEventFinder
     {

@@ -7,6 +7,7 @@ using System.Web.Http;
 using EventMapper;
 using EventMapper.Controllers;
 using EventMapper.Models;
+using EventMapper.Models.Interfaces;
 using Moq;
 using NUnit.Framework;
 
@@ -19,7 +20,6 @@ namespace EventMapper.Tests.Controllers
         public void Get_With_Search_Params_Returns_Results()
         {
             // Arrange
-            var controller = new SearchController();
             var searchTerms = "test search";
             var events = new List<EventItem>();
 
@@ -27,6 +27,7 @@ namespace EventMapper.Tests.Controllers
             mockEventFinder.Setup(
                 e => e.Search(It.IsAny<string>()))
                 .Returns(events);
+            var controller = new SearchController(mockEventFinder.Object);
 
             // Act
             IEnumerable<EventItem> results = controller.Get(searchTerms);
