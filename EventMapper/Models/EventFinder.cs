@@ -22,20 +22,7 @@ namespace EventMapper.Models
 
         public IEnumerable<EventItem> Search(string searchTerm)
         {
-            return new List<EventItem>
-            {
-                new EventItem()
-                {
-                    Latitude = -41.1475787,
-                    Longitude = 175.540889,
-                    Title = "My event!",
-                    Description = "My description...." + MakeEventFinderRequest(),
-                    Start = new DateTime(2015, 2, 28, 12, 12, 12),
-                    End = new DateTime(2015, 2, 28, 12, 12, 12),
-                    Link = new Uri("http://google.com"),
-                    Price = 12.99m
-                }
-            };
+            return MakeEventFinderRequest();
         }
 
         private IEnumerable<EventItem> MakeEventFinderRequest()
@@ -54,12 +41,12 @@ namespace EventMapper.Models
             //request.AddQueryParameter("start_date", "YYYY-MM-DD HH:mm:ss");
             //request.AddQueryParameter("end_date", "YYYY-MM-DD HH:mm:ss");
 
-            request.AddQueryParameter("fields", 
-                "event: (point, name, datetime_end, datetime_start, description, location_summary, url, is_free)"
+            request.AddQueryParameter("fields",
+                "event:(point,name,datetime_end,datetime_start,description,location_summary,url,is_free)"
                 );
-            
-            IRestResponse<List<EventItem>> response = EventFinderClient.Execute<List<EventItem>>(request);
-            return response.Data;
+
+            IRestResponse<Events> response = EventFinderClient.Execute<Events>(request);
+            return response.Data.EventItems;
         }
     }
 }
