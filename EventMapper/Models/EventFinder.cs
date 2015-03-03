@@ -42,7 +42,6 @@ namespace EventMapper.Models
         {
             RestRequest request = new RestRequest(ApiResource, Method.GET);
             request.RequestFormat = DataFormat.Xml;
-            request.AddQueryParameter("fields", "event:(url,name,sessions),session:(timezone,datetime_start)");
             //request.AddQueryParameter("q", "my search string");  // Can use AND OR, NOT and ()
             request.AddQueryParameter("row", "20");
             //request.AddQueryParameter("offset", "20");
@@ -54,6 +53,11 @@ namespace EventMapper.Models
             //request.AddQueryParameter("price_min", "20");
             //request.AddQueryParameter("start_date", "YYYY-MM-DD HH:mm:ss");
             //request.AddQueryParameter("end_date", "YYYY-MM-DD HH:mm:ss");
+
+            request.AddQueryParameter("fields", 
+                "event: (point, name, datetime_end, datetime_start, description, location_summary, url, is_free)"
+                );
+            
             IRestResponse<List<EventItem>> response = EventFinderClient.Execute<List<EventItem>>(request);
             return response.Data;
         }

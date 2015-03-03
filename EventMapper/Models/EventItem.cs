@@ -11,7 +11,9 @@ namespace EventMapper.Models {
         public string Description { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public decimal Price { get; set; }
+        //public decimal Price { get; set; }
         public Uri Link { get; set; }
+        public string LocationSummary { get; set; }
+        public bool IsFree { get; set; }
     }
 }
