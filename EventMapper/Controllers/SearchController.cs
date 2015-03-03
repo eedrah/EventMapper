@@ -11,10 +11,13 @@ namespace EventMapper.Controllers
 {
     public class SearchController : ApiController
     {
-        private IEventFinder _eventFinder;
+        private readonly IEventFinder _eventFinder;
 
-        public SearchController(IEventFinder eventFinder)
-        {
+        public SearchController() {
+            _eventFinder = new EventFinder();
+        }
+
+        public SearchController(IEventFinder eventFinder) {
             _eventFinder = eventFinder;
         }
 
