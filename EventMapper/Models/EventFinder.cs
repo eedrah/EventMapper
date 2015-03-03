@@ -17,7 +17,7 @@ namespace EventMapper.Models
 
         public EventFinder()
         {
-            EventFinderClient.Authenticator = new SimpleAuthenticator("username", "workingtitlewhatshappening", "password", "7xff9nnttb94");
+            EventFinderClient.Authenticator = new HttpBasicAuthenticator("workingtitlewhatshappening", "7xff9nnttb94");
         }
 
         public IEnumerable<EventItem> Search(string searchTerm)
@@ -29,7 +29,7 @@ namespace EventMapper.Models
                     Latitude = -41.1475787,
                     Longitude = 175.540889,
                     Title = "My event!",
-                    Description = "My description....",
+                    Description = "My description...." + MakeEventFinderRequest(),
                     Start = new DateTime(2015, 2, 28, 12, 12, 12),
                     End = new DateTime(2015, 2, 28, 12, 12, 12),
                     Link = new Uri("http://google.com"),
@@ -38,10 +38,24 @@ namespace EventMapper.Models
             };
         }
 
-        private string MakeEventFinderRequest()
+        private IEnumerable<EventItem> MakeEventFinderRequest()
         {
-            RestRequest request = new RestRequest(ApiResource, Method.GET);            
-            request.AddQueryParameter("row", "10")
+            RestRequest request = new RestRequest(ApiResource, Method.GET);
+            request.RequestFormat = DataFormat.Xml;
+            request.AddQueryParameter("fields", "event:(url,name,sessions),session:(timezone,datetime_start)");
+            //request.AddQueryParameter("q", "my search string");  // Can use AND OR, NOT and ()
+            request.AddQueryParameter("row", "20");
+            //request.AddQueryParameter("offset", "20");
+            request.AddQueryParameter("order", "date");
+            //request.AddQueryParameter("free", "1");
+            //request.AddQueryParameter("point", "-36.84846,174.763332");
+            //request.AddQueryParameter("radius", "4.5"); // 4.5km from the point
+            //request.AddQueryParameter("price_max", "20");
+            //request.AddQueryParameter("price_min", "20");
+            //request.AddQueryParameter("start_date", "YYYY-MM-DD HH:mm:ss");
+            //request.AddQueryParameter("end_date", "YYYY-MM-DD HH:mm:ss");
+            IRestResponse<List<EventItem>> response = EventFinderClient.Execute<List<EventItem>>(request);
+            return response.Data;
         }
     }
 }
