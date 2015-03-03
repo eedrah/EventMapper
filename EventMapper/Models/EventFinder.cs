@@ -10,7 +10,20 @@ namespace EventMapper.Models
     {
         public IEnumerable<EventItem> Search(string searchTerm)
         {
-            throw new System.NotImplementedException();
+            return new List<EventItem>
+            {
+                new EventItem()
+                {
+                    Latitude = -41.1475787,
+                    Longitude = 175.540889,
+                    Title = "My event!",
+                    Description = "My description....",
+                    Start = new DateTime(2015, 2, 28, 12, 12, 12),
+                    End = new DateTime(2015, 2, 28, 12, 12, 12),
+                    Link = new Uri("http://google.com"),
+                    Price = 12.99m
+                }
+            };
         }
     }
 }
