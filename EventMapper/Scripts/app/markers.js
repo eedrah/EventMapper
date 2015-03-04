@@ -7,7 +7,7 @@
 
         $.ajax({
             url: "api/search?searchterm=anything",
-            //data: {searchterm: term}
+            //data: {searchterm: ""}
             type: 'GET',
             contentType: 'application/json',
             success: function (data) {
