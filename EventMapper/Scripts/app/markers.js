@@ -13,7 +13,6 @@
                 var infoWindowContent = [];
                 var infoWindow = new google.maps.InfoWindow({ maxWidth: 200 });
                 var marker, i;
-                console.log(data);
                 for (i = 0; i < data.length; i++) {
                     var position = new google.maps.LatLng(data[i].Point.lat, data[i].Point.lng);
                     bounds.extend(position);
