@@ -21,27 +21,37 @@ namespace EventMapper.Models
         {
             EventFinderClient.Authenticator = new HttpBasicAuthenticator("workingtitlewhatshappening", "7xff9nnttb94");
         }
-
-        public IEnumerable<EventItem> Search(string searchTerm)
+        
+            
+       
+        public IEnumerable<EventItem> Search(string searchTerm, int c)
         {
-            string xml = MakeEventFinderRequest();
+            int count = c;
+            string xml = MakeEventFinderRequest(count);
             var serializer = new XmlSerializer(typeof (Events));
             Events theEvents = (Events)serializer.Deserialize(new StringReader(xml));
-
-                return theEvents.EventItems;
-          
+            
+           
+            if (count < 100)
+               return theEvents.EventItems;
+                
+            count += 20;
+           return Search(searchTerm, count);   
         }
 
-        private string MakeEventFinderRequest()
+
+        private string MakeEventFinderRequest(int count)
         {
+            
             string todayDateTime = DateTime.Now.ToString("O");
             string endDateTime = DateTime.Now.AddMonths(1).ToString("O");
+            string offSet = count.ToString();
 
             RestRequest request = new RestRequest(ApiResource, Method.GET);
             request.RequestFormat = DataFormat.Xml;
             //request.AddQueryParameter("q", "my search string");  // Can use AND OR, NOT and ()
             request.AddQueryParameter("rows", "20");
-            //request.AddQueryParameter("offset", "20");
+            request.AddQueryParameter("offset", offSet);
             request.AddQueryParameter("order", "distance_date");
             //request.AddQueryParameter("free", "1");
             request.AddQueryParameter("point", "-41.2829074,174.7842057");
@@ -56,6 +66,7 @@ namespace EventMapper.Models
                 );
 
             IRestResponse response = EventFinderClient.Execute(request);
+            
             return response.Content;
         }
     }
