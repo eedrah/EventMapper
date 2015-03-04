@@ -3,7 +3,7 @@
     var mapView = new MapView();
 
     this.loadMap = function() {
-        mapModel.createMapOnElement(mapView.chooseElementToPlaceMap);
+        mapModel.createMapOnElement(mapView.placeMap);
         mapModel.refreshEvents();
     };
 };

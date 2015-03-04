@@ -1,7 +1,7 @@
 ﻿function MapView() {
     var mapCanvas = $('#map-canvas')[0];
 
-    this.chooseElementToPlaceMap = function(callback) {
-        callback(mapCanvas);
+    this.placeMap = function(mapOptions) {
+        return new google.maps.Map(mapCanvas, mapOptions);
     };
 };
