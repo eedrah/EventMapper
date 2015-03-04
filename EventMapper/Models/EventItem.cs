@@ -27,6 +27,7 @@ namespace EventMapper.Models {
         
         [XmlElement("datetime_start")] public string Start { get; set; }
         [XmlElement("datetime_end")] public string End { get; set; }
+        [XmlElement("datetime_summary")] public string DateSummary { get; set; }
         //public decimal Price { get; set; }
         [XmlElement("url")] public string Link { get; set; }
 

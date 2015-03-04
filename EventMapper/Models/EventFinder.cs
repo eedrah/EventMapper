@@ -34,22 +34,25 @@ namespace EventMapper.Models
 
         private string MakeEventFinderRequest()
         {
+            string todayDateTime = DateTime.Now.ToString("O");
+            string endDateTime = DateTime.Now.AddMonths(1).ToString("O");
+
             RestRequest request = new RestRequest(ApiResource, Method.GET);
             request.RequestFormat = DataFormat.Xml;
             //request.AddQueryParameter("q", "my search string");  // Can use AND OR, NOT and ()
             request.AddQueryParameter("rows", "20");
             //request.AddQueryParameter("offset", "20");
-            request.AddQueryParameter("order", "date");
+            request.AddQueryParameter("order", "distance_date");
             //request.AddQueryParameter("free", "1");
             request.AddQueryParameter("point", "-41.2829074,174.7842057");
             request.AddQueryParameter("radius", "20"); // 4.5km from the point
             //request.AddQueryParameter("price_max", "20");
             //request.AddQueryParameter("price_min", "20");
-            //request.AddQueryParameter("start_date", "YYYY-MM-DD HH:mm:ss");
-            //request.AddQueryParameter("end_date", "YYYY-MM-DD HH:mm:ss");
-
+            request.AddQueryParameter("start_date", todayDateTime);
+            request.AddQueryParameter("end_date", endDateTime);
+     
             request.AddQueryParameter("fields",
-                "event:(point,name,datetime_end,datetime_start,description,location_summary,url,is_free)"
+                "event:(point,name,datetime_end,datetime_start,datetime_summary,description,location_summary,url,is_free)"
                 );
 
             IRestResponse response = EventFinderClient.Execute(request);
