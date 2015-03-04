@@ -15,10 +15,10 @@
                 var marker, i;
 
                 for (i = 0; i < data.length; i++) {
-                    var position = new google.maps.LatLng(data[i].Latitude, data[i].Longitude);
-                    bounds.extend(position);
+                    //var position = new google.maps.LatLng(data[i].Latitude, data[i].Longitude);
+                    bounds.extend(data[i].Point);
                     marker = new google.maps.Marker({
-                        position: position,
+                        position: data[i].Point,
                         map: map,
                         title: data[i].Title
                     });
