@@ -16,7 +16,6 @@ namespace EventMapper
 #if DEBUG
             BundleTable.EnableOptimizations = false;
 #endif
-
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
