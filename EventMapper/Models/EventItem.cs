@@ -16,12 +16,29 @@ namespace EventMapper.Models {
             set {_title = TrimString(value); }
         }
 
-        [XmlElement("description")] public string Description { get; set; }
+        private string _description;
+        [XmlElement("description")]
+        public string Description
+        {
+            get{ return _description;}
+            set { _description = TrimString(value); }
+        }
+        
+        
         [XmlElement("datetime_start")] public string Start { get; set; }
         [XmlElement("datetime_end")] public string End { get; set; }
         //public decimal Price { get; set; }
         [XmlElement("url")] public string Link { get; set; }
-        [XmlElement("location_summary")] public string LocationSummary { get; set; }
+
+        private string _locationSummary;
+        [XmlElement("location_summary")]
+        public string LocationSummary
+        {
+            get { return _locationSummary; } 
+            set { _locationSummary = TrimString(value); }
+        }
+        
+        
         //[XmlElement("is_free")] public bool IsFree { get; set; }
 
         [XmlElement("point")]
@@ -32,9 +49,10 @@ namespace EventMapper.Models {
 
         public string TrimString(string s)
         {
-            if (s.Contains("<!"))
+            if (s.Contains("<![CDATA["))
             {
-               s = s.Remove(0, 9);
+                s = s.Remove(0, 9);
+                s = s.Remove(s.Length - 3, 3);
             }
             return s;
         }
