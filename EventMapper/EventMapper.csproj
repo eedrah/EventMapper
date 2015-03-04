@@ -221,6 +221,7 @@
     <Content Include="Scripts\app\MapController.js" />
     <Content Include="Scripts\app\MapModel.js" />
     <Content Include="Scripts\app\MapView.js" />
+    <Content Include="Scripts\app\Marker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

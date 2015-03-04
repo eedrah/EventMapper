@@ -14,16 +14,16 @@
     this.refreshEvents = function(fnPlaceEventMarkers) {
         //todo: clear all current events?
         dal.downloadData(function(json) {
-            this.createMarkers(fnPlaceEventMarkers, json);
+            createMarkers(fnPlaceEventMarkers, json);
         }.bind(this));
     };
 
-    this.createMarkers = function (fnPlaceEventMarkers, json) {
-        json.forEach(this.createMarker);
+    function createMarkers(fnPlaceEventMarkers, json) {
+        json.forEach(createMarker);
         fnPlaceEventMarkers(markers);
     };
 
-    this.createMarker = function(eventJson) {
-
+    function createMarker(eventJson) {
+        markers.push(new Marker().parseJson(eventJson));
     };
 };
