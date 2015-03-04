@@ -39,13 +39,12 @@ namespace EventMapper.Models {
             set { _locationSummary = TrimString(value); }
         }
         
-        
-        //[XmlElement("is_free")] public bool IsFree { get; set; }
+       //[XmlElement("is_free")] public bool IsFree { get; set; }
 
         [XmlElement("point")]
         public Point Point { get; set; }
 
-        //public double Latitude { get { return Point.lat; } }
+      //public double Latitude { get { return Point.lat; } }
         //public double Longitude { get { return Point.lng; } }
 
         public string TrimString(string s)
@@ -65,6 +64,7 @@ namespace EventMapper.Models {
         public double lat { get; set; }
         public double lng { get; set; }
     }
+
 
     [XmlRoot("events")]
     public class Events

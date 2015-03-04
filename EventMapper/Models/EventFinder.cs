@@ -1,11 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using EventMapper.Controllers;
 using EventMapper.Models.Interfaces;
+using Microsoft.Ajax.Utilities;
 using RestSharp;
 
 namespace EventMapper.Models
@@ -14,7 +17,8 @@ namespace EventMapper.Models
     {
         private const string ApiDomain = "http://api.eventfinder.co.nz";
         private const string ApiResource = "v2/events.xml";
-
+        List<Events> listOfEvents = new List<Events>();
+       
         private static readonly RestClient EventFinderClient = new RestClient(ApiDomain);
 
         public EventFinder()
@@ -24,25 +28,30 @@ namespace EventMapper.Models
         
             
        
-        public IEnumerable<EventItem> Search(string searchTerm, int c)
+        public IEnumerable<EventItem> Search(string searchTerm, int offset)
         {
-            int count = c;
-            string xml = MakeEventFinderRequest(count);
+            
+            string xml = MakeEventFinderRequest(offset);
             var serializer = new XmlSerializer(typeof (Events));
             Events theEvents = (Events)serializer.Deserialize(new StringReader(xml));
+ 
+            while (offset < Convert.ToInt32(theEvents.Count))
+            {
+                listOfEvents.Add(theEvents);
+                offset += 20;
+                Search(searchTerm, offset);
+            }
             
-           
-            if (count < 100)
-               return theEvents.EventItems;
-                
-            count += 20;
-           return Search(searchTerm, count);   
+            return theEvents.EventItems;
+
         }
 
 
-        private string MakeEventFinderRequest(int count)
+
+
+        private string MakeEventFinderRequest(int offset)
         {
-            
+            int count = offset;
             string todayDateTime = DateTime.Now.ToString("O");
             string endDateTime = DateTime.Now.AddMonths(1).ToString("O");
             string offSet = count.ToString();
