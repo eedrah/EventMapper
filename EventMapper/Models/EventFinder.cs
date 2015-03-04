@@ -28,7 +28,8 @@ namespace EventMapper.Models
             var serializer = new XmlSerializer(typeof (Events));
             Events theEvents = (Events)serializer.Deserialize(new StringReader(xml));
 
-            return theEvents.EventItems;
+                return theEvents.EventItems;
+          
         }
 
         private string MakeEventFinderRequest()
