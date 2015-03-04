@@ -4,6 +4,6 @@
 
     this.loadMap = function() {
         mapModel.createMapOnElement(mapView.placeMap);
-        mapModel.refreshEvents();
+        mapModel.refreshEvents(mapView.placeEventMarkers);
     };
 };

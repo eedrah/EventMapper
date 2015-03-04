@@ -4,4 +4,10 @@
     this.placeMap = function(mapOptions) {
         return new google.maps.Map(mapCanvas, mapOptions);
     };
+
+    this.placeEventMarkers = function (markers) {
+        markers.forEach(function() {
+            console.log('placeMarker on map');
+        });
+    };
 };

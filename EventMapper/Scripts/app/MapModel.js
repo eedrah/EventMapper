@@ -1,6 +1,7 @@
 ﻿function MapModel() {
     //this.map
-    //var dal = new Dal();
+    var markers = [];
+    var dal = new Dal();
 
     this.createMapOnElement = function(fnPlaceMap) {
         var mapOptions = {
@@ -10,8 +11,19 @@
         this.map = fnPlaceMap(mapOptions);
     };
 
-    this.refreshEvents = function() {
+    this.refreshEvents = function(fnPlaceEventMarkers) {
         //todo: clear all current events?
+        dal.downloadData(function(json) {
+            this.createMarkers(fnPlaceEventMarkers, json);
+        }.bind(this));
+    };
+
+    this.createMarkers = function (fnPlaceEventMarkers, json) {
+        json.forEach(this.createMarker);
+        fnPlaceEventMarkers(markers);
+    };
+
+    this.createMarker = function(eventJson) {
 
     };
 };

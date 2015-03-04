@@ -5,9 +5,9 @@
             //data: {searchterm: ""}
             type: 'GET',
             dataType: 'json',
-            success: callback(data),
+            success: callback,
             error: function(xhr, status, errorThrown) {
-                alert("Sorry, there was a problem!");
+                alert("Could not connect to the server!");
                 console.log("Error: " + errorThrown);
                 console.log("Status: " + status);
                 console.dir(xhr);

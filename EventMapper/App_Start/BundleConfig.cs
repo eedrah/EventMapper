@@ -28,7 +28,8 @@ namespace EventMapper
                         "~/Scripts/app/app.js",
                         "~/Scripts/app/MapModel.js",
                         "~/Scripts/app/MapController.js",
-                        "~/Scripts/app/MapView.js"
+                        "~/Scripts/app/MapView.js",
+                        "~/Scripts/app/DAL.js"
                         ));
         }
     }
