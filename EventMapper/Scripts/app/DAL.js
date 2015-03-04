@@ -1,4 +1,4 @@
-﻿function DAL() {
+﻿function Dal() {
     this.downloadData = function(callback) {
         $.ajax({
             url: "api/search?searchterm=anything",

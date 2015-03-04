@@ -4,5 +4,6 @@
 
     this.loadMap = function() {
         mapModel.createMapOnElement(mapView.chooseElementToPlaceMap);
+        mapModel.refreshEvents();
     };
 };
