@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    var bounds = new google.maps.LatLngBounds();
+
     $('#map-canvas').click(function (event) {
         event.preventDefault();
 
