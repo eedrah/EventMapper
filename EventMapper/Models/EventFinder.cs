@@ -41,8 +41,8 @@ namespace EventMapper.Models
             //request.AddQueryParameter("offset", "20");
             request.AddQueryParameter("order", "date");
             //request.AddQueryParameter("free", "1");
-            //request.AddQueryParameter("point", "-36.84846,174.763332");
-            //request.AddQueryParameter("radius", "4.5"); // 4.5km from the point
+            request.AddQueryParameter("point", "-41.2829074,174.7842057");
+            request.AddQueryParameter("radius", "20"); // 4.5km from the point
             //request.AddQueryParameter("price_max", "20");
             //request.AddQueryParameter("price_min", "20");
             //request.AddQueryParameter("start_date", "YYYY-MM-DD HH:mm:ss");
