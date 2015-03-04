@@ -1,4 +1,4 @@
-﻿function mapView() {
+﻿function MapView() {
     var mapCanvas = $('#map-canvas');
 
     this.chooseElementToPlaceMap = function(callback) {
