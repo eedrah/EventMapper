@@ -5,9 +5,9 @@
         return new google.maps.Map(mapCanvas, mapOptions);
     };
 
-    this.placeEventMarkers = function (markers) {
-        markers.forEach(function() {
-            console.log('placeMarker on map');
+    this.placeEventMarkers = function (mapModel) {
+        mapModel.markers.forEach(function(marker) {
+            
         });
     };
 };

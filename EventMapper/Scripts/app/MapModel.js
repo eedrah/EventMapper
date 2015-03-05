@@ -20,10 +20,12 @@
 
     function createMarkers(fnPlaceEventMarkers, json) {
         json.forEach(createMarker);
-        fnPlaceEventMarkers(markers);
+        fnPlaceEventMarkers(this);
     };
 
     function createMarker(eventJson) {
-        markers.push(new Marker().parseJson(eventJson));
+        var marker = new Marker();
+        marker.parseJson(eventJson);
+        markers.push(marker);
     };
 };
