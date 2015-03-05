@@ -60,8 +60,8 @@ namespace EventMapper.Models
             request.AddQueryParameter("offset", offSet);
             request.AddQueryParameter("order", "distance_date");
             //request.AddQueryParameter("free", "1");
-            request.AddQueryParameter("point", "-41.2829074,174.7842057"); //Pipitea
-            request.AddQueryParameter("radius", "20"); // 4.5km from the point
+            request.AddQueryParameter("point", "-41.29,174.78"); //Pipitea
+            request.AddQueryParameter("radius", "20"); // 20km from the point
             //request.AddQueryParameter("price_max", "20");
             //request.AddQueryParameter("price_min", "20");
             request.AddQueryParameter("start_date", todayDateTime);
