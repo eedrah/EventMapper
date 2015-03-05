@@ -25,8 +25,12 @@ namespace EventMapper
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
-                        "~/Scripts/map.js",
-                        "~/Scripts/markers.js"
+                        "~/Scripts/app/app.js",
+                        "~/Scripts/app/MapModel.js",
+                        "~/Scripts/app/MapController.js",
+                        "~/Scripts/app/MapView.js",
+                        "~/Scripts/app/DAL.js",
+                        "~/Scripts/app/Marker.js"
                         ));
         }
     }

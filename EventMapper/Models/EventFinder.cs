@@ -50,7 +50,7 @@ namespace EventMapper.Models
         {
             int count = offset;
             string todayDateTime = DateTime.Now.ToString("O");
-            string endDateTime = DateTime.Now.AddDays(7).ToString("O");
+            string endDateTime = DateTime.Now.AddDays(1).ToString("O");
             string offSet = count.ToString();
 
             RestRequest request = new RestRequest(ApiResource, Method.GET);
