@@ -1,6 +1,6 @@
 ﻿function MapModel() {
     //this.map
-    var markers = [];
+    this.markers = [];
     var dal = new Dal();
 
     this.createMapOnElement = function(fnPlaceMap) {
@@ -15,14 +15,16 @@
         //todo: clear all current events?
         dal.downloadData(function(json) {
             createMarkers(fnPlaceEventMarkers, json);
-        }.bind(this));
+        });
     };
 
+    var selfModel = this;
     function createMarkers(fnPlaceEventMarkers, json) {
         json.forEach(createMarker);
-        fnPlaceEventMarkers(this);
+        fnPlaceEventMarkers(selfModel);
     };
 
+    var markers = this.markers;
     function createMarker(eventJson) {
         var marker = new Marker();
         marker.parseJson(eventJson);
