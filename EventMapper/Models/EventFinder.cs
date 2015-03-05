@@ -18,31 +18,37 @@ namespace EventMapper.Models
         private const string ApiDomain = "http://api.eventfinder.co.nz";
         private const string ApiResource = "v2/events.xml";
         List<Events> listOfEvents = new List<Events>();
-       
+       List<EventItem> allItems = new List<EventItem>();
         private static readonly RestClient EventFinderClient = new RestClient(ApiDomain);
 
         public EventFinder()
         {
             EventFinderClient.Authenticator = new HttpBasicAuthenticator("workingtitlewhatshappening", "7xff9nnttb94");
         }
-        
-            
-       
+              
         public IEnumerable<EventItem> Search(string searchTerm, int offset)
         {
             
             string xml = MakeEventFinderRequest(offset);
             var serializer = new XmlSerializer(typeof (Events));
             Events theEvents = (Events)serializer.Deserialize(new StringReader(xml));
- 
-            while (offset < Convert.ToInt32(theEvents.Count))
+
+            while (offset < Convert.ToInt32(theEvents.Count))            
             {
                 listOfEvents.Add(theEvents);
                 offset += 20;
                 Search(searchTerm, offset);
             }
+
             
-            return theEvents.EventItems;
+            foreach (Events e in listOfEvents)
+                for(int i = 0; i < e.EventItems.Length; i++)
+            {
+                allItems.Add(e.EventItems[i]);
+            }
+
+            return allItems;
+
 
         }
 
@@ -53,7 +59,7 @@ namespace EventMapper.Models
         {
             int count = offset;
             string todayDateTime = DateTime.Now.ToString("O");
-            string endDateTime = DateTime.Now.AddMonths(1).ToString("O");
+            string endDateTime = DateTime.Now.AddDays(7).ToString("O");
             string offSet = count.ToString();
 
             RestRequest request = new RestRequest(ApiResource, Method.GET);
@@ -63,7 +69,7 @@ namespace EventMapper.Models
             request.AddQueryParameter("offset", offSet);
             request.AddQueryParameter("order", "distance_date");
             //request.AddQueryParameter("free", "1");
-            request.AddQueryParameter("point", "-41.2829074,174.7842057");
+            request.AddQueryParameter("point", "-41.2829074,174.7842057"); //Pipitea
             request.AddQueryParameter("radius", "20"); // 4.5km from the point
             //request.AddQueryParameter("price_max", "20");
             //request.AddQueryParameter("price_min", "20");
