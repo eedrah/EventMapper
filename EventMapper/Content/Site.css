@@ -30,3 +30,18 @@ body {
     height: 100%;
     width: 100%;
 }
+
+.eventPopup em {
+    display: block;
+}
+
+.eventPopup .start::before {
+    content: "Start: ";
+    font-style: normal;
+}
+
+.eventPopup .end::before {
+    content: "End: ";
+    font-style: normal;
+}
+
