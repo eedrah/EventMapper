@@ -5,8 +5,8 @@
 
     this.createMapOnElement = function(fnPlaceMap) {
         var mapOptions = {
-            zoom: 9,
-            center: { lat: -41.1475787, lng: 175.540889 }
+            zoom: 15,
+            center: { lat: -41.29, lng: 174.78 }
         };
         this.map = fnPlaceMap(mapOptions);
     };
