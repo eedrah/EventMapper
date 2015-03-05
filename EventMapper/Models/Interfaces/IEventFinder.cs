@@ -7,6 +7,6 @@ namespace EventMapper.Models.Interfaces
 {
     public interface IEventFinder
     {
-        IEnumerable<EventItem> Search(string searchTerm, int offset);
+        IEnumerable<EventItem> Search(string searchTerm);
     }
 }

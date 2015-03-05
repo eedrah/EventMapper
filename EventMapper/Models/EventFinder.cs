@@ -17,43 +17,34 @@ namespace EventMapper.Models
     {
         private const string ApiDomain = "http://api.eventfinder.co.nz";
         private const string ApiResource = "v2/events.xml";
-        List<Events> listOfEvents = new List<Events>();
-       List<EventItem> allItems = new List<EventItem>();
         private static readonly RestClient EventFinderClient = new RestClient(ApiDomain);
 
         public EventFinder()
         {
             EventFinderClient.Authenticator = new HttpBasicAuthenticator("workingtitlewhatshappening", "7xff9nnttb94");
         }
-              
-        public IEnumerable<EventItem> Search(string searchTerm, int offset)
+
+        public IEnumerable<EventItem> Search(string searchTerm)
         {
-            
-            string xml = MakeEventFinderRequest(offset);
-            var serializer = new XmlSerializer(typeof (Events));
-            Events theEvents = (Events)serializer.Deserialize(new StringReader(xml));
-
-            while (offset < Convert.ToInt32(theEvents.Count))            
+            List<EventItem> eventsList = new List<EventItem>();
+            int offset = 0;
+            int totalEvents = 1;  // Assume at least one item exists
+            while (offset < totalEvents)
             {
-                listOfEvents.Add(theEvents);
+                Events results = GetEvents(offset, searchTerm);
                 offset += 20;
-                Search(searchTerm, offset);
+                totalEvents = results.Count;
+                eventsList.AddRange(results.EventItems);
             }
-
-            
-            foreach (Events e in listOfEvents)
-                for(int i = 0; i < e.EventItems.Length; i++)
-            {
-                allItems.Add(e.EventItems[i]);
-            }
-
-            return allItems;
-
-
+            return eventsList;
         }
 
-
-
+        public Events GetEvents(int offset, string searchTerm)
+        {
+            string xml = MakeEventFinderRequest(offset);
+            var serializer = new XmlSerializer(typeof(Events));
+            return (Events)serializer.Deserialize(new StringReader(xml));
+        }
 
         private string MakeEventFinderRequest(int offset)
         {
@@ -75,13 +66,13 @@ namespace EventMapper.Models
             //request.AddQueryParameter("price_min", "20");
             request.AddQueryParameter("start_date", todayDateTime);
             request.AddQueryParameter("end_date", endDateTime);
-     
+
             request.AddQueryParameter("fields",
                 "event:(point,name,datetime_end,datetime_start,datetime_summary,description,location_summary,url,is_free)"
                 );
 
             IRestResponse response = EventFinderClient.Execute(request);
-            
+
             return response.Content;
         }
     }

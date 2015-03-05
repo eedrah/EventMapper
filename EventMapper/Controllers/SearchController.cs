@@ -22,7 +22,7 @@ namespace EventMapper.Controllers
         }
 
         public IEnumerable<EventItem> Get(string searchTerm) {
-            return _eventFinder.Search(searchTerm, 0);
+            return _eventFinder.Search(searchTerm);
         }
     }
 }

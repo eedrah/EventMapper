@@ -70,7 +70,7 @@ namespace EventMapper.Models {
     public class Events
     {
         [XmlAttribute("count")]
-        public string Count { get; set; }
+        public int Count { get; set; }
 
         [XmlElement("event")]
         public EventItem[] EventItems { get; set; }
