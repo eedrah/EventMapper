@@ -8,6 +8,11 @@ namespace EventMapper.Controllers
 {
     public class HomeController : Controller
     {
+#if DEBUG
+        public ActionResult Jasmine() {
+            return View();
+        }
+#endif
         public ActionResult Index()
         {
             return View();
