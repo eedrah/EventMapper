@@ -27,6 +27,7 @@ namespace EventMapper.Models {
         
         [XmlElement("datetime_start")] public string Start { get; set; }
         [XmlElement("datetime_end")] public string End { get; set; }
+        [XmlElement("datetime_summary")] public string DateSummary { get; set; }
         //public decimal Price { get; set; }
         [XmlElement("url")] public string Link { get; set; }
 
@@ -38,13 +39,12 @@ namespace EventMapper.Models {
             set { _locationSummary = TrimString(value); }
         }
         
-        
-        //[XmlElement("is_free")] public bool IsFree { get; set; }
+       //[XmlElement("is_free")] public bool IsFree { get; set; }
 
         [XmlElement("point")]
         public Point Point { get; set; }
 
-        //public double Latitude { get { return Point.lat; } }
+      //public double Latitude { get { return Point.lat; } }
         //public double Longitude { get { return Point.lng; } }
 
         public string TrimString(string s)
@@ -65,11 +65,12 @@ namespace EventMapper.Models {
         public double lng { get; set; }
     }
 
+
     [XmlRoot("events")]
     public class Events
     {
         [XmlAttribute("count")]
-        public string Counting { get; set; }
+        public int Count { get; set; }
 
         [XmlElement("event")]
         public EventItem[] EventItems { get; set; }
